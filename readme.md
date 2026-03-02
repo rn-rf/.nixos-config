@@ -136,35 +136,6 @@ Runtime changes should use `hyprctl` instead of modifying config files.
 
 ---
 
-##  Rebuild System
-
-Alias:
-
-```
-utopia
-```
-
-Runs:
-
-```
-sudo nixos-rebuild switch --flake ~/.nixos-config#Utopia
-```
-
-
-##  Dotfiles Philosophy
-
-This setup separates:
-
-### Declarative (Git-tracked)
-
-* Hyprland config
-* Waybar layout & themes
-* terminal configuration
-
-This ensures reproducibility and stability.
-
----
-
 ##  TODO
 
 ### Waybar & UI
@@ -192,7 +163,6 @@ This ensures reproducibility and stability.
 
 Personal configuration. Use freely for inspiration.
 
----
 
 **System Name:** Utopia
 **User:** rn
