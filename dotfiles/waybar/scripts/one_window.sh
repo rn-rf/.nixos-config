@@ -3,7 +3,8 @@
 # Hyprland event socket
 SOCKET="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
 
-CONFIG_DIR="$HOME/.config/waybar"
+# CONFIG_DIR="$HOME/.config/waybar"
+CONFIG_DIR="$HOME/.nixos-config/dotfiles/waybar"
 COLOR_FILE="$CONFIG_DIR/color.css"
 STATE_FILE="$CONFIG_DIR/.one_window_state"
 

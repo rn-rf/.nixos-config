@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     wget
     git
+    tree
     vim
     neovim
     tmux
@@ -18,6 +19,7 @@
 
     swww
     waybar
+    socat
     wofi
     grim
     slurp
