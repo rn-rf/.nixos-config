@@ -31,7 +31,7 @@
   xdg.configFile."tmux".source = ../dotfiles/tmux;
 
   home.file.".bashrc".source = ../dotfiles/.bashrc;
-  home.file.".local/bin/toggal".source =
-  ../dotfiles/waybar/scripts/one_window.sh;
+  # home.file.".local/bin/toggal".source =
+  # ../dotfiles/waybar/scripts/one_window.sh;
 
 }
