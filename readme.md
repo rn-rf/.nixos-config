@@ -12,22 +12,43 @@ A modular, flake-based NixOS configuration focused on:
 
 ##  Setup
 
-Simply clone the repo in ~/ of NixOS
+Clone the repository into your home directory:
 
-Run:
-
+```bash
+git clone <repo-url> ~/.nixos-config
+cd ~/.nixos-config
 ```
+
+Apply the configuration:
+
+```bash
 sudo nixos-rebuild switch --flake ~/.nixos-config#Utopia
 ```
 
-and Automagically all necessary config will symlink to there place and if you change anything use above command to rebuild or use 
+This will:
 
-Alias:
+* install all required system packages
+* configure the desktop environment
+* link dotfiles into their correct locations
+* set up the complete user environment
+
+---
+
+###  Updating the system
+
+After making changes, rebuild with:
+
+```bash
+sudo nixos-rebuild switch --flake ~/.nixos-config#Utopia
 ```
+
+or use the alias:
+
+```bash
 utopia
 ```
 
-
+Your system will update automatically with the new configuration.
 
 ---
 
