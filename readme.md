@@ -1,4 +1,4 @@
-# ❄️ Utopia — NixOS + Hyprland Configuration
+# ❄️ Utopia: NixOS + Hyprland Configuration
 
 A modular, flake-based NixOS configuration focused on:
 
