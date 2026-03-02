@@ -1,0 +1,6 @@
+# build results
+result
+result-*
+
+.direnv
+secrets/
