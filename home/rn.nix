@@ -22,7 +22,7 @@
   ];
 
   programs.git.enable = true;
-
+  programs.bash.enable = false;
   fonts.fontconfig.enable = true;
   
   xdg.configFile."hypr".source = ../dotfiles/hypr;
