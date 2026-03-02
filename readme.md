@@ -15,8 +15,7 @@ A modular, flake-based NixOS configuration focused on:
 Clone the repository into your home directory:
 
 ```bash
-git clone <repo-url> ~/.nixos-config
-cd ~/.nixos-config
+git clone https://github.com/rn-rf/.nixos-config.git ~/.nixos-config
 ```
 
 Apply the configuration:
