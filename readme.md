@@ -7,11 +7,31 @@ A modular, flake-based NixOS configuration focused on:
 * Wayland-first workflow
 * Hyprland customization
 * portable dotfiles
-* developer productivity
 
 ---
 
-## 🧭 Overview
+##  Setup
+
+Simply clone the repo in ~/ of NixOS
+
+Run:
+
+```
+sudo nixos-rebuild switch --flake ~/.nixos-config#Utopia
+```
+
+and Automagically all necessary config will symlink to there place and if you change anything use above command to rebuild or use 
+
+Alias:
+```
+utopia
+```
+
+
+
+---
+
+##  Overview
 
 This repository contains the complete system and user environment configuration for my NixOS setup.
 
@@ -20,12 +40,12 @@ It uses:
 * **Nix flakes** for reproducibility
 * **Home Manager** for user environment management
 * **Hyprland** as the primary Wayland compositor
-* **Waybar** for status bar and UI modules
+* **Waybar** for status bar
 * **Modular configuration structure** for maintainability
 
 ---
 
-## 🧱 Architecture
+##  Architecture
 
 ```
 .nixos-config/
@@ -38,9 +58,9 @@ It uses:
 
 ---
 
-## 🖥 System Features
+##  System Features
 
-### ✔ Core
+###  Core
 
 * Flake-based NixOS configuration
 * Modular system layout
@@ -48,13 +68,13 @@ It uses:
 * PipeWire audio
 * NetworkManager
 
-### ✔ Desktop
+###  Desktop
 
 * Hyprland (Wayland compositor)
 * GNOME fallback session
 * Flatpak support
 
-### ✔ UI & Workflow
+###  UI & Workflow
 
 * Waybar with modular scripts
 * Dynamic transparency system
@@ -62,7 +82,7 @@ It uses:
 * Ghostty terminal
 * Custom GTK + icon themes
 
-### ✔ Development Environment
+###  Development Environment
 
 * Node.js & TypeScript tooling
 * Java LSP (jdtls)
@@ -71,7 +91,7 @@ It uses:
 
 ---
 
-## 🏠 Home Manager
+##  Home Manager
 
 Home Manager manages:
 
@@ -98,7 +118,7 @@ This ensures reproducibility and version control.
 
 ---
 
-## 🪟 Hyprland
+##  Hyprland
 
 Hyprland configuration is stored in:
 
@@ -116,58 +136,12 @@ Runtime changes should use `hyprctl` instead of modifying config files.
 
 ---
 
-## 📊 Waybar
-
-Waybar configuration lives in:
-
-```
-dotfiles/waybar/
-```
-
-### Features
-
-* theme system
-* dynamic transparency
-* modular scripts
-* window state detection
-* custom modules
-
-Scripts live in:
-
-```
-dotfiles/waybar/scripts/
-```
-
----
-
-## 🎨 Dynamic Transparency System
-
-A script (`one_window.sh` / `toggal`) dynamically changes Waybar transparency based on window count.
-
-### Design
-
-Immutable configuration:
-
-```
-~/.config/waybar
-```
-
-Runtime state:
-
-```
-~/.cache/waybar
-```
-
-This follows XDG standards and NixOS immutability principles.
-
----
-
-## 🔁 Rebuild System
+##  Rebuild System
 
 Alias:
 
 ```
-rebuild
+utopia
 ```
 
 Runs:
@@ -176,25 +150,8 @@ Runs:
 sudo nixos-rebuild switch --flake ~/.nixos-config#Utopia
 ```
 
----
 
-## 🚀 Installation / Rebuild
-
-### Rebuild system
-
-```
-sudo nixos-rebuild switch --flake ~/.nixos-config#Utopia
-```
-
-### Home Manager
-
-```
-home-manager switch
-```
-
----
-
-## 📂 Dotfiles Philosophy
+##  Dotfiles Philosophy
 
 This setup separates:
 
@@ -204,59 +161,21 @@ This setup separates:
 * Waybar layout & themes
 * terminal configuration
 
-### Runtime state
-
-* dynamic CSS
-* toggle state
-* temporary files
-
 This ensures reproducibility and stability.
 
 ---
 
-## ⚠️ Known Issues
-
-### Waybar Transparency Toggle
-
-* `toggal` script currently attempts to write to immutable config paths.
-* Must use:
-
-```
-~/.cache/waybar/
-```
-
-instead of:
-
-```
-~/.config/waybar/
-```
-
-### Window State Module
-
-* `window_checker.sh` needs migration to runtime cache.
-* Module integration with Waybar pending.
-
----
-
-## 🛠 TODO
+##  TODO
 
 ### Waybar & UI
 
-* [ ] Fix `toggal` runtime cache usage
-* [ ] Integrate `window_checker.sh` with cache state
-* [ ] Improve transparency transitions
+* [ ] Integrate `Toggal` with cache state (change transperancy of waybar dynamically) 
 * [ ] Add multi-monitor awareness
-* [ ] Optimize Waybar reload (signal vs restart)
 
-### Hyprland
-
-* [ ] Add runtime toggles using `hyprctl`
-* [ ] Gap & border toggle script
-* [ ] animation presets
 
 ### System Improvements
 
-* [ ] declarative Neovim setup (nixvim)
+* [ ] Neovim setup (nixvim/nixcats)
 * [ ] add secrets management (agenix/sops)
 * [ ] power management tuning
 * [ ] gaming support profile
@@ -266,29 +185,12 @@ instead of:
 
 * [ ] devshell configuration
 * [ ] language-specific profiles
-* [ ] docker/podman module
 
 ---
 
-## 🧠 Future Enhancements
-
-* multi-host support
-* CI build validation
-* remote rebuild support
-* theming automation
-* system profile switching
-
----
-
-## 📜 License
+##  License
 
 Personal configuration. Use freely for inspiration.
-
----
-
-## 🙌 Credits
-
-Inspired by the NixOS & Hyprland communities.
 
 ---
 
@@ -296,4 +198,3 @@ Inspired by the NixOS & Hyprland communities.
 **User:** rn
 **OS:** NixOS (flake-based)
 **Compositor:** Hyprland
-**Philosophy:** Reproducible, minimal, and fast.
