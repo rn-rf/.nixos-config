@@ -10,6 +10,10 @@
 
   services.flatpak.enable = true;
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.symbols-only
+  ];
+
   environment.gnome.excludePackages = with pkgs; [
     gnome-maps
     geary

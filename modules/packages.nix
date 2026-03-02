@@ -29,6 +29,8 @@
     swaynotificationcenter
 
     networkmanagerapplet
+    bibata-cursors
+    adw-gtk3
     brightnessctl
     pamixer
     playerctl
