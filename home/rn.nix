@@ -23,8 +23,6 @@
 
   programs.git.enable = true;
 
-  programs.bash.enable = true;
-
   fonts.fontconfig.enable = true;
 
   xdg.configFile."hypr".source = ../dotfiles/hypr;
