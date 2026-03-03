@@ -6,32 +6,12 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-  };
-
-  home.packages = with pkgs; [
-    nixCats
-
-    # LSP servers
-    lua-language-server
-    nil
-    typescript-language-server
-    vscode-langservers-extracted
-    jdt-language-server
-
-    # formatters
-    stylua
-    prettierd
-    eslint_d
-    black
-    shfmt
-  ];
-
-  programs.nixCats = {
-    enable = true;
 
     plugins = with pkgs.vimPlugins; [
       plenary-nvim
       telescope-nvim
+      telescope-fzf-native-nvim
+      telescope-ui-select-nvim
       nvim-lspconfig
       nvim-treesitter
       nvim-cmp
@@ -49,8 +29,30 @@
       comment-nvim
       nvim-autopairs
       tokyonight-nvim
+      todo-comments-nvim
+      mini-nvim
+      conform-nvim
+      blink-cmp
+      mason-nvim
+      mason-lspconfig-nvim
+      mason-tool-installer-nvim
+      fidget-nvim
     ];
   };
+
+  # LSP servers & tools (installed via Nix, not Mason)
+  home.packages = with pkgs; [
+    lua-language-server
+    nil
+    typescript-language-server
+    vscode-langservers-extracted
+    jdt-language-server
+    stylua
+    prettierd
+    eslint_d
+    black
+    shfmt
+  ];
 
   xdg.configFile."nvim".source = ../dotfiles/nvim;
 }
