@@ -11,6 +11,11 @@ vim.o.mouse = 'a'
 vim.o.showmode = false
 vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
+vim.o.tabstop = 4      -- Number of spaces a <Tab> counts for
+vim.o.shiftwidth = 4   -- Size of an indent
+vim.o.expandtab = true -- Use spaces instead of tabs
+vim.o.softtabstop = 4  -- Number of spaces inserted when pressing Tab
+
 vim.o.breakindent = true
 vim.o.undofile = true
 vim.o.ignorecase = true
@@ -43,9 +48,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>')
 -- =============================
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.hl.on_yank()
-  end,
+	callback = function()
+		vim.hl.on_yank()
+	end,
 })
 
 -- =============================
@@ -53,11 +58,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- =============================
 
 vim.diagnostic.config {
-  update_in_insert = false,
-  severity_sort = true,
-  float = { border = 'rounded', source = 'if_many' },
-  virtual_text = true,
-  underline = { severity = { min = vim.diagnostic.severity.WARN } },
+	update_in_insert = false,
+	severity_sort = true,
+	float = { border = 'rounded', source = 'if_many' },
+	virtual_text = true,
+	underline = { severity = { min = vim.diagnostic.severity.WARN } },
 }
 
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
@@ -68,90 +73,99 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- Gitsigns
 pcall(function()
-  require('gitsigns').setup()
+	require('gitsigns').setup()
 end)
 
 -- Which-key
 pcall(function()
-  require('which-key').setup()
+	require('which-key').setup()
 end)
 
 -- Telescope
 pcall(function()
-  require('telescope').setup {
-    extensions = {
-      ['ui-select'] = require('telescope.themes').get_dropdown(),
-    },
-  }
+	require('telescope').setup {
+		extensions = {
+			['ui-select'] = require('telescope.themes').get_dropdown(),
+		},
+	}
 end)
 
 -- Treesitter
-pcall(function()
-  require('nvim-treesitter.configs').setup {
-    ensure_installed = { 'lua', 'bash', 'json', 'javascript', 'typescript' },
-    highlight = { enable = true },
-    indent = { enable = true },
-  }
-end)
+require('nvim-treesitter.configs').setup {
+	highlight = { enable = true },
+	indent = { enable = true },
+}
 
 -- Lualine
 pcall(function()
-  require('lualine').setup()
+	require('lualine').setup()
 end)
 
 -- Autopairs
 pcall(function()
-  require('nvim-autopairs').setup()
+	require('nvim-autopairs').setup()
 end)
 
 -- Comment.nvim
 pcall(function()
-  require('Comment').setup()
+	require('Comment').setup()
 end)
 
 -- Neo-tree
 pcall(function()
-  require('neo-tree').setup()
+	require('neo-tree').setup()
 end)
 
 -- Completion (blink.cmp)
 pcall(function()
-  require('blink.cmp').setup {}
+	require('blink.cmp').setup {}
 end)
 
 -- Conform (formatter)
 pcall(function()
-  require('conform').setup {
-    format_on_save = {
-      timeout_ms = 500,
-      lsp_format = 'fallback',
-    },
-  }
+	require('conform').setup {
+		format_on_save = {
+			timeout_ms = 500,
+			lsp_format = 'fallback',
+		},
+	}
 end)
 
 -- Colorscheme
 pcall(function()
-  vim.cmd.colorscheme 'tokyonight-night'
+	vim.cmd.colorscheme 'tokyonight-night'
 end)
 
 
 
+-- =====================================
+-- Modern LSP Setup (Neovim 0.11+)
+-- =====================================
 
+-- Optional: nice LSP keymaps when server attaches
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(event)
+		local opts = { buffer = event.buf }
 
--- =============================
--- LSP Setup
--- =============================
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+	end,
+})
 
-local lspconfig = require('lspconfig')
+local servers = {
+	"clangd",
+	"lua_ls",
+	"nil_ls",
+	"ts_ls",
+	"jdtls",
+}
 
--- C / C++
-lspconfig.clangd.setup {}
-
--- Lua
-lspconfig.lua_ls.setup {}
-
--- Nix
-lspconfig.nil_ls.setup {}
-
--- TypeScript
-lspconfig.tsserver.setup {}
+for _, server in ipairs(servers) do
+	vim.lsp.config(server, {})
+	vim.lsp.enable(server)
+end

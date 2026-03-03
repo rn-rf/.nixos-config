@@ -13,7 +13,15 @@
       telescope-fzf-native-nvim
       telescope-ui-select-nvim
       nvim-lspconfig
-      nvim-treesitter
+      (nvim-treesitter.withPlugins (p: [
+        p.c
+        p.cpp
+        p.lua
+        p.bash
+        p.json
+        p.javascript
+        p.typescript
+      ]))
       nvim-cmp
       cmp-nvim-lsp
       cmp-buffer
