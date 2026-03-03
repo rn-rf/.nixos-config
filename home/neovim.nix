@@ -52,6 +52,7 @@
     eslint_d
     black
     shfmt
+    clang-tools
   ];
 
   xdg.configFile."nvim".source = ../dotfiles/nvim;

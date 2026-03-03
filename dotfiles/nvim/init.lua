@@ -133,3 +133,25 @@ end)
 pcall(function()
   vim.cmd.colorscheme 'tokyonight-night'
 end)
+
+
+
+
+
+-- =============================
+-- LSP Setup
+-- =============================
+
+local lspconfig = require('lspconfig')
+
+-- C / C++
+lspconfig.clangd.setup {}
+
+-- Lua
+lspconfig.lua_ls.setup {}
+
+-- Nix
+lspconfig.nil_ls.setup {}
+
+-- TypeScript
+lspconfig.tsserver.setup {}
