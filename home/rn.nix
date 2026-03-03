@@ -8,6 +8,7 @@
 
   imports = [
     ./hyprland.nix
+    ./neovim.nix
   ];
 
   home.packages = with pkgs; [
