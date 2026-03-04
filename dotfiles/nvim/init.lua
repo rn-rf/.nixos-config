@@ -1,7 +1,7 @@
 -- =============================
 -- Basic Settings
 -- =============================
-v = vim
+local v = vim
 
 v.g.mapleader = ' '
 v.g.maplocalleader = ' '
@@ -12,10 +12,10 @@ v.o.mouse = 'a'
 v.o.showmode = false
 v.schedule(function() v.o.clipboard = 'unnamedplus' end)
 
-v.o.tabstop = 4      -- Number of spaces a <Tab> counts for
-v.o.shiftwidth = 4   -- Size of an indent
-v.o.expandtab = true -- Use spaces instead of tabs
-v.o.softtabstop = 4  -- Number of spaces inserted when pressing Tab
+v.o.tabstop = 4
+v.o.shiftwidth = 4
+v.o.expandtab = true
+v.o.softtabstop = 4
 
 v.o.breakindent = true
 v.o.undofile = true
@@ -43,8 +43,23 @@ v.keymap.set('n', '<C-h>', '<C-w><C-h>')
 v.keymap.set('n', '<C-l>', '<C-w><C-l>')
 v.keymap.set('n', '<C-j>', '<C-w><C-j>')
 v.keymap.set('n', '<C-k>', '<C-w><C-k>')
+v.keymap.set('n', 'ww', '<cmd>w<CR>', { desc = "Save file" })
 
-v.keymap.set("n", "<leader>e", ":Neotree toggle<CR>")
+v.keymap.set("n", "<leader>e", "<cmd>Neotree toggle filesystem reveal left<CR>")
+
+local ok, builtin = pcall(require, "telescope.builtin")
+if ok then
+    v.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+    v.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+    v.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+    v.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+    v.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+    v.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+    v.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+    v.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+    v.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files' })
+    v.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+end
 
 -- =============================
 -- Yank Highlight

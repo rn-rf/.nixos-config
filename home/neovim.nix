@@ -41,9 +41,6 @@
       mini-nvim
       conform-nvim
       blink-cmp
-      mason-nvim
-      mason-lspconfig-nvim
-      mason-tool-installer-nvim
       fidget-nvim
     ];
   };
