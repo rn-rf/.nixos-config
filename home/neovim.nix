@@ -37,6 +37,8 @@
       comment-nvim
       nvim-autopairs
       tokyonight-nvim
+      midnight-nvim
+      kanagawa-nvim
       todo-comments-nvim
       mini-nvim
       conform-nvim
@@ -45,7 +47,7 @@
     ];
   };
 
-  # LSP servers & tools (installed via Nix, not Mason)
+  # LSP servers & tools (installed via Nix)
   home.packages = with pkgs; [
     lua-language-server
     nil

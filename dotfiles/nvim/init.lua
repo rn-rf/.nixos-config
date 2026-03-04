@@ -16,6 +16,7 @@ v.o.tabstop = 4
 v.o.shiftwidth = 4
 v.o.expandtab = true
 v.o.softtabstop = 4
+v.o.fillchars = "eob: "
 
 v.o.breakindent = true
 v.o.undofile = true
@@ -43,7 +44,7 @@ v.keymap.set('n', '<C-h>', '<C-w><C-h>')
 v.keymap.set('n', '<C-l>', '<C-w><C-l>')
 v.keymap.set('n', '<C-j>', '<C-w><C-j>')
 v.keymap.set('n', '<C-k>', '<C-w><C-k>')
-v.keymap.set('n', 'ww', '<cmd>w<CR>', { desc = "Save file" })
+v.keymap.set('n', 'WW', '<cmd>w<CR>', { desc = "Save file" })
 
 v.keymap.set("n", "<leader>e", "<cmd>Neotree toggle filesystem reveal left<CR>")
 
@@ -141,7 +142,16 @@ end)
 
 -- Colorscheme
 pcall(function()
-    v.cmd.colorscheme 'tokyonight-night'
+    require("kanagawa").setup({
+        transparent = true,
+    })
+
+    v.cmd.colorscheme("kanagawa")
+
+    v.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    v.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+    v.api.nvim_set_hl(0, "LineNr", { bg = "#16161d" })
+    v.api.nvim_set_hl(0, "CursorLineNr", { bg = "#16161d" })
 end)
 
 
