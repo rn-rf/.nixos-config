@@ -69,11 +69,11 @@ It uses:
 
 ```
 .nixos-config/
-├── flake.nix              # flake entrypoint
-├── hosts/                 # host-specific configuration
-├── modules/               # reusable system modules
-├── home/                  # Home Manager configuration
-└── dotfiles/              # user config & UI customization
+├── flake.nix
+├── hosts/
+├── modules/
+├── home/
+└── dotfiles/
 ```
 
 ---
