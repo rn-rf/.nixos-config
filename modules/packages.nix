@@ -11,6 +11,7 @@
     unzip
     jq
     gcc
+    python3
     nodejs
     jdk
 

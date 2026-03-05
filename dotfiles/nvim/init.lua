@@ -49,6 +49,8 @@ v.keymap.set('n', 'WW', '<cmd>w<CR>', { desc = "Save file" })
 v.keymap.set("n", "<leader>e", "<cmd>Neotree toggle filesystem reveal left<CR>")
 
 local ok, builtin = pcall(require, "telescope.builtin")
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
 if ok then
     v.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     v.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
@@ -61,6 +63,7 @@ if ok then
     v.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files' })
     v.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 end
+
 
 -- =============================
 -- Yank Highlight
@@ -124,7 +127,14 @@ pcall(function()
 end)
 
 pcall(function()
-    require('neo-tree').setup()
+    require("neo-tree").setup({
+        window = {
+            mappings = {
+                ["E"] = "expand_all_nodes",
+                ["C"] = "close_all_nodes",
+            },
+        },
+    })
 end)
 
 pcall(function()
@@ -140,20 +150,59 @@ pcall(function()
     }
 end)
 
--- Colorscheme
+-- colorscheme
+require("rose-pine").setup({
+    disable_background = true,
+})
+v.cmd.colorscheme("rose-pine")
+local transparent_groups = {
+    "Normal",
+    "NormalNC",
+    "EndOfBuffer",
+    "SignColumn",
+    "NormalFloat",
+    "FloatBorder",
+}
+for _, group in ipairs(transparent_groups) do
+    v.api.nvim_set_hl(0, group, { bg = "none" })
+end
+
+
+-- Oil file manager
 pcall(function()
-    require("kanagawa").setup({
-        transparent = true,
+    require("oil").setup({
+        default_file_explorer = false,
+
+        columns = {
+            "icon",
+        },
+
+        view_options = {
+            show_hidden = true,
+        },
+
+        float = {
+            padding = 2,
+            max_width = 80,
+            max_height = 40,
+        },
     })
-
-    v.cmd.colorscheme("kanagawa")
-
-    v.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    v.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
-    v.api.nvim_set_hl(0, "LineNr", { bg = "#16161d" })
-    v.api.nvim_set_hl(0, "CursorLineNr", { bg = "#16161d" })
 end)
 
+v.keymap.set("n", "-", function()
+    v.cmd("topleft vsplit")
+    v.cmd("vertical resize 35")
+    require("oil").open()
+end, { desc = "Oil sidebar" })
+
+v.api.nvim_create_autocmd("FileType", {
+    pattern = "oil",
+    callback = function()
+        v.opt_local.number = false
+        v.opt_local.relativenumber = false
+        v.opt_local.signcolumn = "no"
+    end,
+})
 
 
 -- =====================================

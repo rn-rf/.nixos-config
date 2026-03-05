@@ -18,6 +18,8 @@
     gnome-tweaks
     nwg-look
     pywal
+    inkscape-with-extensions
+    gimp2
     neofetch
     tela-circle-icon-theme
   ];
@@ -25,7 +27,7 @@
   programs.git.enable = true;
   programs.bash.enable = false;
   fonts.fontconfig.enable = true;
-  
+
   xdg.configFile."hypr".source = ../dotfiles/hypr;
   xdg.configFile."waybar".source = ../dotfiles/waybar;
   xdg.configFile."ghostty".source = ../dotfiles/ghostty;

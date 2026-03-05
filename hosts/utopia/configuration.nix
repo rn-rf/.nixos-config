@@ -1,4 +1,9 @@
-{ config, pkgs, unstable, ... }:
+{
+  config,
+  pkgs,
+  unstable,
+  ...
+}:
 
 {
   imports = [
@@ -19,12 +24,21 @@
   users.users.rn = {
     isNormalUser = true;
     description = "Aryan Rathod";
-    extraGroups = [ "wheel" "networkmanager" "bluetooth" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "bluetooth"
+    ];
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "25.11";
+
+  programs.nix-ld.enable = true;
 }

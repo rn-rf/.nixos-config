@@ -16,6 +16,8 @@
       (nvim-treesitter.withPlugins (p: [
         p.c
         p.cpp
+        p.python
+        p.java
         p.lua
         p.bash
         p.json
@@ -34,9 +36,11 @@
       indent-blankline-nvim
       nvim-web-devicons
       neo-tree-nvim
+      oil-nvim
       comment-nvim
       nvim-autopairs
       tokyonight-nvim
+      rose-pine
       midnight-nvim
       kanagawa-nvim
       todo-comments-nvim
@@ -53,6 +57,7 @@
     nil
     typescript-language-server
     vscode-langservers-extracted
+    pyright
     jdt-language-server
     stylua
     prettierd
