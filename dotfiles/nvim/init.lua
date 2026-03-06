@@ -47,6 +47,7 @@ v.keymap.set('n', '<C-k>', '<C-w><C-k>')
 v.keymap.set('n', 'WW', '<cmd>w<CR>', { desc = "Save file" })
 
 v.keymap.set("n", "<leader>e", "<cmd>Neotree toggle filesystem reveal left<CR>")
+v.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
 
 local ok, builtin = pcall(require, "telescope.builtin")
 local actions = require("telescope.actions")
@@ -189,12 +190,6 @@ pcall(function()
     })
 end)
 
-v.keymap.set("n", "-", function()
-    v.cmd("topleft vsplit")
-    v.cmd("vertical resize 35")
-    require("oil").open()
-end, { desc = "Oil sidebar" })
-
 v.api.nvim_create_autocmd("FileType", {
     pattern = "oil",
     callback = function()
@@ -230,6 +225,7 @@ local servers = {
     "nil_ls",
     "ts_ls",
     "jdtls",
+    "pyright",
 }
 
 for _, server in ipairs(servers) do
