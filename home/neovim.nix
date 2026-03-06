@@ -10,6 +10,7 @@
     plugins = with pkgs.vimPlugins; [
       plenary-nvim
       telescope-nvim
+      harpoon2
       telescope-fzf-native-nvim
       telescope-ui-select-nvim
       nvim-lspconfig

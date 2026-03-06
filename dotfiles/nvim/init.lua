@@ -1,11 +1,53 @@
+local v = vim
+local ok, builtin = pcall(require, "telescope.builtin")
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+local harpoon = require("harpoon")
+local data_path = v.fn.stdpath("data") .. "/harpoon_lists.json"
+local current_list = "a"
+
+-- =============================
+-- Harpoon Setup
+-- =============================
+
+harpoon:setup()
+
+local function load_lists()
+    local f = io.open(data_path, "r")
+    if not f then
+        return {}
+    end
+    local content = f:read("*a")
+    f:close()
+    if not content or content == "" then
+        return {}
+    end
+    local ok, decoded = pcall(v.json.decode, content)
+    if ok then
+        return decoded
+    end
+    return {}
+end
+
+
+local function save_lists(lists)
+    local f = io.open(data_path, "w")
+    if not f then
+        return
+    end
+    f:write(v.json.encode(lists))
+    f:close()
+end
+
+local lists = load_lists()
+
 -- =============================
 -- Basic Settings
 -- =============================
-local v = vim
 
 v.g.mapleader = ' '
 v.g.maplocalleader = ' '
-v.g.have_nerd_font = false
+v.g.have_nerd_font = true
 
 v.o.number = true
 v.o.mouse = 'a'
@@ -49,9 +91,6 @@ v.keymap.set('n', 'WW', '<cmd>w<CR>', { desc = "Save file" })
 v.keymap.set("n", "<leader>e", "<cmd>Neotree toggle filesystem reveal left<CR>")
 v.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
 
-local ok, builtin = pcall(require, "telescope.builtin")
-local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
 if ok then
     v.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     v.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
@@ -65,6 +104,45 @@ if ok then
     v.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 end
 
+v.keymap.set("n", "<leader>hh", function() harpoon:list(current_list):add() end, { desc = 'Append to [H]arpoon' })
+v.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list(current_list)) end,
+    { desc = '[H]arpoon [L]ist' })
+v.keymap.set("n", "<leader>1", function() harpoon:list(current_list):select(1) end, { desc = 'Goto number' })
+v.keymap.set("n", "<leader>2", function() harpoon:list(current_list):select(2) end, { desc = 'Goto number' })
+v.keymap.set("n", "<leader>3", function() harpoon:list(current_list):select(3) end, { desc = 'Goto number' })
+v.keymap.set("n", "<leader>4", function() harpoon:list(current_list):select(4) end, { desc = 'Goto number' })
+v.keymap.set("n", "<leader>5", function() harpoon:list(current_list):select(5) end, { desc = 'Goto number' })
+v.keymap.set("n", "<leader>6", function() harpoon:list(current_list):select(6) end, { desc = 'Goto number' })
+v.keymap.set("n", "<leader>7", function() harpoon:list(current_list):select(7) end, { desc = 'Goto number' })
+
+v.keymap.set("n", "<leader>ha", function()
+    v.ui.input({ prompt = "Harpoon list name: " }, function(name)
+        if not name or name == "" then return end
+        lists[name] = true
+        save_lists(lists)
+        print("Created list: " .. name)
+    end)
+end)
+
+v.keymap.set("n", "<leader>hg", function()
+    v.ui.input({ prompt = "Go to list: " }, function(name)
+        if not name or name == "" then return end
+        current_list = name;
+        print("Switched to list: " .. name)
+    end)
+end)
+
+v.keymap.set("n", "<leader>hs", function()
+    local names = {}
+    for name, _ in pairs(lists) do
+        table.insert(names, name)
+    end
+    v.ui.select(names, { prompt = "Harpoon lists" }, function(choice)
+        if choice then
+            harpoon.ui:toggle_quick_menu(harpoon:list(choice))
+        end
+    end)
+end)
 
 -- =============================
 -- Yank Highlight
