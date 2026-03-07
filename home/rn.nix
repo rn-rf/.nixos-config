@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  zenbrowser,
+  pkgs,
+  ...
+}:
 {
   home.username = "rn";
   home.homeDirectory = "/home/rn";
@@ -20,6 +25,8 @@
     gimp2
     neofetch
     tela-circle-icon-theme
+
+    zenbrowser.packages.${pkgs.system}.default
   ];
 
   programs.git.enable = true;
