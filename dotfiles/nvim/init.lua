@@ -55,7 +55,6 @@ v.g.have_nerd_font = true
 v.o.number = true
 v.o.mouse = 'a'
 v.o.showmode = false
-v.schedule(function() v.o.clipboard = 'unnamedplus' end)
 
 v.o.tabstop = 4
 v.o.shiftwidth = 4
@@ -89,10 +88,25 @@ v.keymap.set('n', '<C-h>', '<C-w><C-h>')
 v.keymap.set('n', '<C-l>', '<C-w><C-l>')
 v.keymap.set('n', '<C-j>', '<C-w><C-j>')
 v.keymap.set('n', '<C-k>', '<C-w><C-k>')
+
+v.keymap.set("n", "<C-d>", "<C-d>zz")
+v.keymap.set("n", "<C-u>", "<C-u>zz")
+v.keymap.set("n", "n", "nzzzv")
+v.keymap.set("n", "N", "Nzzzv")
+v.keymap.set("x", "<leader>p", [["_dP]])
+v.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+v.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+v.keymap.set("n", "J", "mzJ`z")
+v.keymap.set("n", "<leader>sc", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+v.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+v.keymap.set("i", "kl", "<Esc>")
+v.keymap.set("n", "<leader>y", '"+y')
+v.keymap.set("v", "<leader>y", '"+y')
+
 v.keymap.set('n', 'FF', '<cmd>w<CR>', { desc = "Save file" })
 
 v.keymap.set("n", "<leader>e", "<cmd>Neotree toggle filesystem reveal left<CR>")
-v.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
+v.keymap.set("n", "<leader>o", "<cmd>Oil<CR>", { desc = "Open parent directory" })
 
 if teleok then
     v.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
@@ -329,3 +343,5 @@ for _, server in ipairs(servers) do
     })
     v.lsp.enable(server)
 end
+
+require("lazy")
