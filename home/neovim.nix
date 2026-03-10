@@ -10,10 +10,13 @@
     plugins = with pkgs.vimPlugins; [
       plenary-nvim
       telescope-nvim
-      harpoon2
       telescope-fzf-native-nvim
       telescope-ui-select-nvim
+
+      harpoon2
+
       nvim-lspconfig
+
       (nvim-treesitter.withPlugins (p: [
         p.c
         p.cpp
@@ -25,30 +28,26 @@
         p.javascript
         p.typescript
       ]))
-      nvim-cmp
-      cmp-nvim-lsp
-      cmp-buffer
-      cmp-path
+
+      blink-cmp
       luasnip
-      cmp_luasnip
+      friendly-snippets
+
       which-key-nvim
       gitsigns-nvim
       lualine-nvim
-      indent-blankline-nvim
       nvim-web-devicons
-      neo-tree-nvim
-      oil-nvim
-      comment-nvim
-      nvim-autopairs
-      tokyonight-nvim
-      rose-pine
-      midnight-nvim
-      kanagawa-nvim
-      todo-comments-nvim
       mini-nvim
-      conform-nvim
-      blink-cmp
+
+      oil-nvim
+      neo-tree-nvim
+
+      rose-pine
+      todo-comments-nvim
+      undotree
       fidget-nvim
+
+      obsidian-nvim
     ];
   };
 

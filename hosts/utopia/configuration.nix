@@ -28,6 +28,7 @@
       "wheel"
       "networkmanager"
       "bluetooth"
+      "docker"
     ];
   };
 
@@ -40,6 +41,7 @@
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.11";
   programs.nix-ld.enable = true;
+  virtualisation.docker.enable = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics.enable = true;
