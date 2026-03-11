@@ -344,4 +344,4 @@ for _, server in ipairs(servers) do
     v.lsp.enable(server)
 end
 
-require("lazy")
+-- require("lazy")
