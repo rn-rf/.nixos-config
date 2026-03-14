@@ -1,0 +1,28 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  esc
+  caps
+  a s d f
+  j k l ;
+)
+
+(defalias
+  a-alt (tap-hold 200 200 a lalt)
+  sc-super (tap-hold 200 200 s lmet)
+  d-lshift (tap-hold 200 200 d lshift)
+  f-ctrl (tap-hold 200 200 f lctrl)
+
+  j-ctrl (tap-hold 200 200 j rctrl)
+  k-rshift (tap-hold 200 200 k rshift)
+  l-super (tap-hold 200 200 l rmet)
+  semi-alt (tap-hold 200 200 ; ralt)
+)
+
+(deflayer base
+  caps esc
+  @a-alt @sc-super @d-lshift @f-ctrl
+  @j-ctrl @k-rshift @l-super @semi-alt
+)
