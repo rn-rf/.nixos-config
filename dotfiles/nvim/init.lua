@@ -53,6 +53,7 @@ v.g.maplocalleader = ' '
 v.g.have_nerd_font = true
 
 v.o.number = true
+v.o.relativenumber = true
 v.o.mouse = 'a'
 v.o.showmode = false
 

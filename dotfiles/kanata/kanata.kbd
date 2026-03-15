@@ -1,28 +1,48 @@
 (defcfg
   process-unmapped-keys yes
+  concurrent-tap-hold yes
+)
+
+(defvar
+  tap-time 150
+  hold-time 220
 )
 
 (defsrc
-  esc
   caps
   a s d f
   j k l ;
 )
 
 (defalias
-  a-alt (tap-hold 200 200 a lalt)
-  sc-super (tap-hold 200 200 s lmet)
-  d-lshift (tap-hold 200 200 d lshift)
-  f-ctrl (tap-hold 200 200 f lctrl)
+  ;; LEFT HAND MODS
+  a-alt (tap-hold-except-keys $tap-time $hold-time a lalt (q w e r t a s d f g z x c v b))
+  s-super (tap-hold-except-keys $tap-time $hold-time s lmet (q w e r t a s d f g z x c v b))
+  d-shift (tap-hold-except-keys $tap-time $hold-time d lshift (q w e r t a s d f g z x c v b))
+  f-ctrl (tap-hold-except-keys $tap-time $hold-time f lctrl (q w e r t a s d f g z x c v b))
 
-  j-ctrl (tap-hold 200 200 j rctrl)
-  k-rshift (tap-hold 200 200 k rshift)
-  l-super (tap-hold 200 200 l rmet)
-  semi-alt (tap-hold 200 200 ; ralt)
+  ;; RIGHT HAND MODS
+  j-ctrl (tap-hold-except-keys $tap-time $hold-time j rctrl (y u i o p h j k l ; n m))
+  k-shift (tap-hold-except-keys $tap-time $hold-time k rshift (y u i o p h j k l ; n m))
+  l-super (tap-hold-except-keys $tap-time $hold-time l rmet (y u i o p h j k l ; n m))
+  semi-alt (tap-hold-except-keys $tap-time $hold-time ; ralt (y u i o p h j k l ; n m))
+
+  ;; CAPS → hold for raw
+  caps-raw (tap-hold-release $tap-time $hold-time caps (layer-while-held raw))
+)
+
+(defchordsv2
+  (j i o) bspc 40 first-release ()
 )
 
 (deflayer base
-  caps esc
-  @a-alt @sc-super @d-lshift @f-ctrl
-  @j-ctrl @k-rshift @l-super @semi-alt
+  @caps-raw
+  @a-alt @s-super @d-shift @f-ctrl
+  @j-ctrl @k-shift @l-super @semi-alt
+)
+
+(deflayer raw
+  caps
+  a s d f
+  j k l ;
 )
