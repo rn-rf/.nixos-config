@@ -4,45 +4,46 @@
 )
 
 (defvar
-  tap-time 150
-  hold-time 220
+  tap-time 180
+  hold-time 200
+
+  ;; exception groups
+  left-keys (a s d f)
+  right-keys (e r t y u i o p a h j k l c v b n m)
 )
 
 (defsrc
-  caps
-  a s d f
-  j k l ;
+  s d f g
+  h j k l ;
 )
 
 (defalias
-  ;; LEFT HAND MODS
-  a-alt (tap-hold-except-keys $tap-time $hold-time a lalt (q w e r t a s d f g z x c v b))
-  s-super (tap-hold-except-keys $tap-time $hold-time s lmet (q w e r t a s d f g z x c v b))
-  d-shift (tap-hold-except-keys $tap-time $hold-time d lshift (q w e r t a s d f g z x c v b))
-  f-ctrl (tap-hold-except-keys $tap-time $hold-time f lctrl (q w e r t a s d f g z x c v b))
+  ;; Trigger HRM layer
+  s-hrm (tap-hold-except-keys $tap-time $hold-time s (layer-while-held hrm) $right-keys)
+  semi-hrm (tap-hold-except-keys $tap-time $hold-time ; (layer-while-held hrm) $left-keys)
 
-  ;; RIGHT HAND MODS
-  j-ctrl (tap-hold-except-keys $tap-time $hold-time j rctrl (y u i o p h j k l ; n m))
-  k-shift (tap-hold-except-keys $tap-time $hold-time k rshift (y u i o p h j k l ; n m))
-  l-super (tap-hold-except-keys $tap-time $hold-time l rmet (y u i o p h j k l ; n m))
-  semi-alt (tap-hold-except-keys $tap-time $hold-time ; ralt (y u i o p h j k l ; n m))
+  ;; LEFT MODS
+  d-super (tap-hold $tap-time $hold-time d lmet)
+  f-ctrl (tap-hold $tap-time $hold-time f lctrl)
+  g-alt (tap-hold $tap-time $hold-time g ralt)
 
-  ;; CAPS → hold for raw
-  caps-raw (tap-hold-release $tap-time $hold-time caps (layer-while-held raw))
+  ;; RIGHT MODS
+  h-alt (tap-hold $tap-time $hold-time h lalt)
+  j-ctrl (tap-hold $tap-time $hold-time j rctrl)
+  k-shift (tap-hold $tap-time $hold-time k rshift)
+  l-super (tap-hold $tap-time $hold-time l rmet)
 )
 
 (defchordsv2
-  (j i o) bspc 40 first-release ()
+  (k l) bspc 60 first-release ()
 )
 
 (deflayer base
-  @caps-raw
-  @a-alt @s-super @d-shift @f-ctrl
-  @j-ctrl @k-shift @l-super @semi-alt
+  @s-hrm d f g
+  h j k l @semi-hrm
 )
 
-(deflayer raw
-  caps
-  a s d f
-  j k l ;
+(deflayer hrm
+  s @d-super @f-ctrl @g-alt
+  @h-alt @j-ctrl @k-shift @l-super ;
 )

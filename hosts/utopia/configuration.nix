@@ -52,6 +52,21 @@
         };
     };
 
+    security.sudo.extraRules = [
+    {
+        users = [ "rn" ];
+        commands = [
+        {
+            command = "/run/current-system/sw/bin/systemctl start kanata-default";
+            options = [ "NOPASSWD" ];
+        }
+        {
+            command = "/run/current-system/sw/bin/systemctl stop kanata-default";
+            options = [ "NOPASSWD" ];
+        }
+        ];
+    }
+    ];
 
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware.graphics.enable = true;

@@ -14,6 +14,10 @@
         nodejs
         jdk
 
+        go
+        delve
+        gotools
+
         ghostty
         alacritty
 

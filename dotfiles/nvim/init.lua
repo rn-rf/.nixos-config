@@ -73,7 +73,7 @@ v.o.timeoutlen = 300
 v.o.splitright = true
 v.o.splitbelow = true
 v.o.list = true
-v.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+v.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' }
 v.o.inccommand = 'split'
 v.o.cursorline = true
 v.o.scrolloff = 10
@@ -104,7 +104,7 @@ v.keymap.set("i", "kl", "<Esc>")
 v.keymap.set("n", "<leader>y", '"+y')
 v.keymap.set("v", "<leader>y", '"+y')
 
-v.keymap.set('n', 'FF', '<cmd>w<CR>', { desc = "Save file" })
+v.keymap.set('n', '<leader>w', '<cmd>w<CR>', { desc = "Save file" })
 
 v.keymap.set("n", "<leader>e", "<cmd>Neotree toggle filesystem reveal left<CR>")
 v.keymap.set("n", "<leader>o", "<cmd>Oil<CR>", { desc = "Open parent directory" })
@@ -336,6 +336,7 @@ local servers = {
     "ts_ls",
     "jdtls",
     "pyright",
+    "gopls",
 }
 
 for _, server in ipairs(servers) do

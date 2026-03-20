@@ -27,6 +27,8 @@
         p.json
         p.javascript
         p.typescript
+        p.go
+        p.gomod
       ]))
 
       blink-cmp
@@ -54,6 +56,7 @@
   # LSP servers & tools (installed via Nix)
   home.packages = with pkgs; [
     lua-language-server
+    gopls
     nil
     typescript-language-server
     vscode-langservers-extracted
