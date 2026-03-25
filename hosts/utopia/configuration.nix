@@ -24,16 +24,14 @@
     users.users.rn = {
         isNormalUser = true;
         description = "Aryan Rathod";
-        extraGroups = [
-            "wheel"
-                "networkmanager"
-                "bluetooth"
-                "docker"
+        extraGroups = ["wheel"
+            "networkmanager"
+            "bluetooth"
+            "docker"
         ];
     };
 
-    nix.settings.experimental-features = [
-        "nix-command"
+    nix.settings.experimental-features = ["nix-command"
             "flakes"
     ];
 
@@ -68,19 +66,4 @@
     }
     ];
 
-    services.xserver.videoDrivers = [ "nvidia" ];
-    hardware.graphics.enable = true;
-    hardware.nvidia = {
-        modesetting.enable = true;
-        powerManagement.enable = true;
-        powerManagement.finegrained = true;
-
-        open = false;
-        prime = {
-            offload.enable = true;
-            offload.enableOffloadCmd = true;
-            intelBusId = "PCI:0:2:0";
-            nvidiaBusId = "PCI:1:0:0";
-        };
-    };
 }

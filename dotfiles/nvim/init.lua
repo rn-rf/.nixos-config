@@ -100,7 +100,7 @@ v.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 v.keymap.set("n", "J", "mzJ`z")
 v.keymap.set("n", "<leader>sc", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 v.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-v.keymap.set("i", "kl", "<Esc>")
+v.keymap.set("i", "io", "<Esc>")
 v.keymap.set("n", "<leader>y", '"+y')
 v.keymap.set("v", "<leader>y", '"+y')
 

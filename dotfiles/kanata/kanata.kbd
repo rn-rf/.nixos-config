@@ -1,49 +1,76 @@
 (defcfg
   process-unmapped-keys yes
   concurrent-tap-hold yes
+  rapid-event-delay 5
 )
 
 (defvar
   tap-time 180
-  hold-time 200
+  hold-time 180
 
   ;; exception groups
-  left-keys (a s d f)
-  right-keys (e r t y u i o p a h j k l c v b n m)
+  semi-except (a s d f)
+  s-except (e r t y u i o p a h j k l c v b n m)
 )
 
 (defsrc
-  s d f g
-  h j k l ;
+  q w e r t y u i o p
+  a s d f g h j k l ;
+  z x c v b n m , . /
+  caps '
 )
 
 (defalias
-  ;; Trigger HRM layer
-  s-hrm (tap-hold-except-keys $tap-time $hold-time s (layer-while-held hrm) $right-keys)
-  semi-hrm (tap-hold-except-keys $tap-time $hold-time ; (layer-while-held hrm) $left-keys)
+  ;; HRM layer triggers
+  s-hrm (tap-hold-except-keys $tap-time $hold-time s (layer-while-held hrm) $s-except)
+  semi-hrm (tap-hold-except-keys $tap-time $hold-time ; (layer-while-held hrm) $semi-except)
 
   ;; LEFT MODS
-  d-super (tap-hold $tap-time $hold-time d lmet)
-  f-ctrl (tap-hold $tap-time $hold-time f lctrl)
+  d-ctrl (tap-hold $tap-time $hold-time d lctrl)
+  f-super (tap-hold $tap-time $hold-time f lmet)
   g-alt (tap-hold $tap-time $hold-time g ralt)
 
   ;; RIGHT MODS
   h-alt (tap-hold $tap-time $hold-time h lalt)
-  j-ctrl (tap-hold $tap-time $hold-time j rctrl)
+  j-super (tap-hold $tap-time $hold-time j rmet)
   k-shift (tap-hold $tap-time $hold-time k rshift)
-  l-super (tap-hold $tap-time $hold-time l rmet)
+  l-ctrl (tap-hold $tap-time $hold-time l rctrl)
+
+  ;; SYMBOL LAYER
+  caps-sym (tap-hold $tap-time $hold-time caps (layer-while-held sym))
+  quote-sym (tap-hold $tap-time $hold-time ' (layer-while-held sym))
 )
 
 (defchordsv2
-  (k l) bspc 60 first-release ()
+  (k l) bspc 30 first-release ()
 )
 
 (deflayer base
-  @s-hrm d f g
-  h j k l @semi-hrm
+  q w e r t y u i o p
+  a @s-hrm d f g h j k l @semi-hrm
+  z x c v b n m , . /
+  @caps-sym @quote-sym
 )
 
 (deflayer hrm
-  s @d-super @f-ctrl @g-alt
-  @h-alt @j-ctrl @k-shift @l-super ;
+  q w e r t y u i o p
+  a s @d-ctrl @f-super @g-alt @h-alt @j-super @k-shift @l-ctrl ;
+  z x c v b n m , . /
+  caps '
 )
+
+(deflayer sym
+  S-1 S-] ] S-0 S-5 S-6 S-9 [ S-[ S--
+  1 S-= - S-8 = left down up right 0
+  ` S-` c v b n m , S-\ \
+  caps '
+)
+
+;; FOR UNDERSTANDING PURPOSE
+;;   (deflayer sym
+;;    ! } ] ) %     ^ { [ ( _
+;;    1 + - * =     left down up right 0
+;;    ` ~ c v b       n m , | \
+;;    caps '
+;;   )
+
