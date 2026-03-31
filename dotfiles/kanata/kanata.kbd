@@ -58,7 +58,7 @@
 
 (deflayer hrm
   q w e r t y u i o p
-  @a-shift s @d-ctrl @f-super @g-alt @h-alt @j-super @k-ctrl l @semi-shift
+  a s @d-ctrl @f-super @g-alt @h-alt @j-super @k-ctrl l @semi-shift
   z x c v b n m , . /
   caps
 )
