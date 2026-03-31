@@ -5,11 +5,11 @@
 )
 
 (defvar
-  tap-time 180
-  hold-time 180
+  tap-time 200
+  hold-time 200
 
   ;; exception groups
-  semi-except (a s d f)
+  l-except (e r t y u i p a s d f g ; c v b n m)
   s-except (e r t y u i o p a h j k l c v b n m)
 )
 
@@ -17,60 +17,63 @@
   q w e r t y u i o p
   a s d f g h j k l ;
   z x c v b n m , . /
-  caps '
+  caps
 )
 
 (defalias
   ;; HRM layer triggers
   s-hrm (tap-hold-except-keys $tap-time $hold-time s (layer-while-held hrm) $s-except)
-  semi-hrm (tap-hold-except-keys $tap-time $hold-time ; (layer-while-held hrm) $semi-except)
+  l-hrm (tap-hold-except-keys $tap-time $hold-time l (layer-while-held hrm) $l-except)
 
   ;; LEFT MODS
   d-ctrl (tap-hold $tap-time $hold-time d lctrl)
   f-super (tap-hold $tap-time $hold-time f lmet)
   g-alt (tap-hold $tap-time $hold-time g ralt)
+  semi-shift (tap-hold $tap-time $hold-time ; lshift)
 
   ;; RIGHT MODS
   h-alt (tap-hold $tap-time $hold-time h lalt)
   j-super (tap-hold $tap-time $hold-time j rmet)
-  k-shift (tap-hold $tap-time $hold-time k rshift)
-  l-ctrl (tap-hold $tap-time $hold-time l rctrl)
+  k-ctrl (tap-hold $tap-time $hold-time k rctrl)
+  a-shift (tap-hold $tap-time $hold-time a rshift)
 
   ;; SYMBOL LAYER
   caps-sym (tap-hold $tap-time $hold-time caps (layer-while-held sym))
-  quote-sym (tap-hold $tap-time $hold-time ' (layer-while-held sym))
+  semi-sym (tap-hold $tap-time $hold-time ; (layer-while-held sym))
 )
 
 (defchordsv2
-  (k l) bspc 30 first-release ()
+  (k l) bspc 20 first-release ()
+  (, .) C-bspc 20 first-release ()
+  (s d) esc  20 first-release ()
+  (x c) del  20 first-release ()
 )
 
 (deflayer base
   q w e r t y u i o p
-  a @s-hrm d f g h j k l @semi-hrm
+  a @s-hrm d f g h j k @l-hrm @semi-sym
   z x c v b n m , . /
-  @caps-sym @quote-sym
+  @caps-sym
 )
 
 (deflayer hrm
   q w e r t y u i o p
-  a s @d-ctrl @f-super @g-alt @h-alt @j-super @k-shift @l-ctrl ;
+  @a-shift s @d-ctrl @f-super @g-alt @h-alt @j-super @k-ctrl l @semi-shift
   z x c v b n m , . /
-  caps '
+  caps
 )
 
 (deflayer sym
-  S-1 S-] ] S-0 S-5 S-6 S-9 [ S-[ S--
+  S-` S-[ [ S-9 S-' ' S-0 ] S-] S--
   1 S-= - S-8 = left down up right 0
-  ` S-` c v b n m , S-\ \
-  caps '
+  S-1 S-2 S-3 S-4 S-5 S-6 S-7 ` S-\ \
+  caps
 )
 
 ;; FOR UNDERSTANDING PURPOSE
 ;;   (deflayer sym
-;;    ! } ] ) %     ^ { [ ( _
+;;    ! ( [ { '     " } ] ) _
 ;;    1 + - * =     left down up right 0
-;;    ` ~ c v b       n m , | \
-;;    caps '
+;;    ` ~ @ # $     % ^ & | \
 ;;   )
 
